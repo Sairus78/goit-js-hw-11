@@ -9,3 +9,130 @@
 @import url('./base.css');
 
 /* Sections style */
+/* Spinner loader styles */
+.loader {
+  display: none;
+  border: 16px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 16px solid #3498db;
+  width: 120px;
+  height: 120px;
+  animation: spin 2s linear infinite;
+  margin: 50px auto;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.hidden {
+  display: none;
+}
+
+.visible {
+  display: block;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+#search-form {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+input {
+  padding: 10px;
+  font-size: 16px;
+  width: 400px;
+}
+
+button {
+  padding: 10px 20px;
+  font-size: 16px;
+}
+
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-gap: 20px;
+}
+
+.photo-card {
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.photo-card img {
+  width: 100%;
+  display: block;
+}
+
+.loader {
+  display: block;
+  margin: 20px auto;
+  font-size: 24px;
+}
+
+/* Основна стилізація для галереї */
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3 зображення в одному рядку */
+  grid-gap: 20px;
+}
+
+.photo-card {
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  height: 100%; /* Повна висота для картки */
+}
+
+/* Фіксована висота для зображення */
+.photo-card img {
+  width: 360px;
+  height: 200px; /* Задаємо однакову висоту для всіх фото */
+  object-fit: cover; /* Обрізаємо зображення, якщо воно не поміщається */
+  display: block;
+  border-bottom: 1px solid #ddd;
+}
+
+/* Фіксована висота для контейнера зі статистикою */
+.info {
+  display: flex;
+  justify-content: space-between; /* Всі елементи у рядок */
+  padding: 10px;
+  background-color: #f9f9f9;
+  height: 80px; /* Однакова висота для всіх блоків зі статистикою */
+  align-items: center; /* Вирівнювання по центру по вертикалі */
+}
+
+.info-item {
+  text-align: center; /* Вирівнювання назв і значень по центру */
+}
+
+.info-item b {
+  display: block; /* Відображаємо заголовок на окремому рядку */
+  font-size: 14px;
+  color: #333;
+}
+
+.info-item span {
+  display: block; /* Відображаємо значення на окремому рядку */
+  font-size: 12px;
+  line-height: 24px;
+  font-weight: 400;
+  color: #000;
+}
