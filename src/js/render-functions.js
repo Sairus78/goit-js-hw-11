@@ -1,10 +1,3 @@
-import SimpleLightbox from 'simplelightbox';
-import 'simplelightbox/dist/simple-lightbox.min.css';
-import iziToast from 'izitoast';
-import 'izitoast/dist/css/iziToast.min.css';
-
-const galleryElement = document.querySelector('.gallery');
-
 export function renderGallery(images) {
   const markup = images
     .map(
@@ -20,6 +13,7 @@ export function renderGallery(images) {
         return `
       <div class="photo-card">
         <a href="${largeImageURL}" class="gallery-item">
+          <span class="loader"></span>
           <img src="${webformatURL}" alt="${tags}" loading="lazy" />
         </a>
         <div class="info">
@@ -44,46 +38,24 @@ export function renderGallery(images) {
       }
     )
     .join('');
-  //   return `
-  // <div class="photo-card">
-  //   <a href="${largeImageURL}" class="gallery-item">
-  //     <img src="${webformatURL}" alt="${tags}" loading="lazy" />
-  //   </a>
-  //   <div class="info">
-  //     <p><b>Likes:</b> ${likes}</p>
-  //     <p><b>Views:</b> ${views}</p>
-  //     <p><b>Comments:</b> ${comments}</p>
-  //     <p><b>Downloads:</b> ${downloads}</p>
-  //   </div>
-  // </div>`;
-  //   }
-  // )
-  // .join('');
 
+  const galleryElement = document.querySelector('.gallery');
   galleryElement.insertAdjacentHTML('beforeend', markup);
 
-  const lightbox = new SimpleLightbox('.gallery a', {
-    captionsData: 'alt',
-    captionDelay: 250,
+  // Після рендерингу галереї ініціалізуємо завантаження зображень
+  const imagesAll = document.querySelectorAll('.gallery-item img');
+  images.forEach(img => {
+    img.onload = () => {
+      const loader = img.previousElementSibling; // Лоадер перед зображенням
+      loader.classList.add('hidden'); // Ховаємо лоадер
+      img.classList.remove('hidden'); // Показуємо зображення
+    };
   });
-  lightbox.refresh();
 }
 
 export function clearGallery() {
-  galleryElement.innerHTML = '';
+  document.querySelector('.gallery').innerHTML = '';
 }
-
-export function showNotification(message) {
-  iziToast.error({ title: 'Error', message: message });
-}
-
-// export function showLoader() {
-//   document.querySelector('.loader').classList.remove('hidden');
-// }
-
-// export function hideLoader() {
-//   document.querySelector('.loader').classList.add('hidden');
-// }
 
 export function showLoader() {
   const loader = document.querySelector('.loader');
